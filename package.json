@@ -1,7 +1,25 @@
 {
   "name": "travel-app",
+  "version": "1.0.0",
   "private": true,
+  "description": "Travel Admin Dashboard",
+  "keywords": [
+    "react",
+    "react-router",
+    "dashboard"
+  ],
+  "homepage": "https://github.com/cath-ly/travel-agency-dashboard#readme",
+  "bugs": {
+    "url": "https://github.com/cath-ly/travel-agency-dashboard/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cath-ly/travel-agency-dashboard.git"
+  },
+  "license": "ISC",
+  "author": "Chantakrak Ath-Ly",
   "type": "module",
+  "main": "root.tsx",
   "scripts": {
     "build": "react-router build",
     "dev": "react-router dev",
@@ -11,6 +29,14 @@
   "dependencies": {
     "@react-router/node": "^7.5.3",
     "@react-router/serve": "^7.5.3",
+    "@syncfusion/ej2-base": "^29.2.4",
+    "@syncfusion/ej2-react-buttons": "^29.2.5",
+    "@syncfusion/ej2-react-charts": "^29.2.5",
+    "@syncfusion/ej2-react-dropdowns": "^29.2.7",
+    "@syncfusion/ej2-react-grids": "^29.2.7",
+    "@syncfusion/ej2-react-maps": "^29.2.4",
+    "@syncfusion/ej2-react-navigations": "^29.2.7",
+    "@syncfusion/ej2-react-splitbuttons": "^29.2.4",
     "clsx": "^2.1.1",
     "isbot": "^5.1.27",
     "react": "^19.1.0",
