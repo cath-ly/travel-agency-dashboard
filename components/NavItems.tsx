@@ -3,6 +3,11 @@ import { sidebarItems } from "~/constants";
 import cn from "~/lib/utils/cn";
 
 const NavItems = () => {
+  const user = {
+    name: "Chantakrak",
+    email: "chantakrakathly@gmail.com",
+    imageUrl: "/assets/images/headshot.jpg",
+  };
   return (
     <section className="nav-items">
       <Link to="/" className="link-logo">
@@ -35,6 +40,30 @@ const NavItems = () => {
             </NavLink>
           ))}
         </nav>
+
+        <footer className="nav-footer">
+          <img
+            src={user?.imageUrl || "assets/images/headshot.jpg"}
+            alt={user?.name || "Chantakrak"}
+          />
+
+          <article>
+            <h2>{user?.name}</h2>
+            <p>{user?.email}</p>
+          </article>
+
+          <button
+            onClick={() => {
+              console.log("logout");
+            }}
+            className="cursor-pointer">
+            <img
+              src="/assets/icons/logout.svg"
+              alt="logout"
+              className="size-6"
+            />
+          </button>
+        </footer>
       </div>
     </section>
   );
