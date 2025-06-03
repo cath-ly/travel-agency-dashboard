@@ -12,7 +12,8 @@ const NavItems = ({ handleClick }: { handleClick?: () => void }) => {
     <section className="nav-items">
       <Link to="/" className="link-logo">
         <img
-          src="../public/assets/images/logo.png"
+          src="
+        /assets/images/logo.png"
           alt="logo"
           className="size-[30px]"
         />
