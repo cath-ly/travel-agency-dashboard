@@ -1,10 +1,10 @@
 import { Link, NavLink } from "react-router";
 import { sidebarItems } from "~/constants";
-import cn from "~/lib/utils/cn";
+import { cn } from "~/lib/utils";
 
 const NavItems = ({ handleClick }: { handleClick?: () => void }) => {
   const user = {
-    name: "Chantakrak",
+    name: "Chantakrak Ath-Ly",
     email: "chantakrakathly@gmail.com",
     imageUrl: "/assets/images/headshot.jpg",
   };
