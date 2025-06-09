@@ -76,7 +76,7 @@
     @apply w-full min-h-screen  flex flex-col gap-10;
   }
 
-  .stats-card {
+  .stat-card {
     @apply p-6 flex flex-col gap-6 bg-white shadow-400 rounded-20 text-dark-100;
 
     .content {

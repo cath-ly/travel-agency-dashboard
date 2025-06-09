@@ -83,11 +83,11 @@ declare interface TripCardProps {
   price: string;
 }
 
-declare interface StatsCard {
+declare interface StatCard {
   headerTitle: string;
   total: number;
-  lastMonthCount: number;
-  currentMonthCount: number;
+  currentMonthTotal: number;
+  lastMonthTotal: number;
 }
 
 declare interface TrendResult {
@@ -97,17 +97,17 @@ declare interface TrendResult {
 
 declare interface DashboardStats {
   totalUsers: number;
-  usersJoined: {
+  monthlyUsers: {
     currentMonth: number;
     lastMonth: number;
   };
-  userRole: {
+  activeUser: {
     total: number;
     currentMonth: number;
     lastMonth: number;
   };
   totalTrips: number;
-  tripsCreated: {
+  monthlyTrips: {
     currentMonth: number;
     lastMonth: number;
   };
