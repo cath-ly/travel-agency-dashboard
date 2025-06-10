@@ -1,3 +1,12 @@
+1.3.0
+
+- Added Dashboard component:
+  - TripCard
+  - StatCard
+
+- Util function:
+  - getFirstWord
+
 1.2.0
 
 - Added Dashboard Layout
