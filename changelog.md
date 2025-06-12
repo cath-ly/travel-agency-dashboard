@@ -1,3 +1,9 @@
+2.0.0
+
+- Added Appwrite Dependencies
+- Implemented Google OAuth Functionality
+- Implemented API setup points for client
+
 1.3.0
 
 - Added Dashboard component:
