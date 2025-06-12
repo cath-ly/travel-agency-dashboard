@@ -8,7 +8,7 @@ export const getExistingUser = async (id: string) => {
             appwriteConfig.usersCollectionId,
             [ Query.equal("accountId", id)]
         );
-        if (documents.length === 0){
+        if (total === 0){
             return null;
         }
         return documents[0];
