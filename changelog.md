@@ -2,7 +2,7 @@
 
 - Added Appwrite Dependencies
 - Implemented Google OAuth Functionality
-- Implemented API setup points for client
+- Implemented Authentication API
 
 1.3.0
 
