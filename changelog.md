@@ -1,3 +1,12 @@
+2.1.0
+
+- Implemented Sign-In Page
+- Fetches Google OAuth data
+- Replaced Mock Data w/ Data from Google in:
+  - Dashboard Page
+  - AdminLayout Page
+  - NavItems Component
+
 2.0.0
 
 - Added Appwrite Dependencies
