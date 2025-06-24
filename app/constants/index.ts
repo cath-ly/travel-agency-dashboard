@@ -146,10 +146,10 @@ export const user = { name: "Chantakrak" };
 
 export const dashboardStat = {
   totalUsers: 10,
-  monthlyUsers: { currentMonth: 8, lastMonth: 2},
+  monthlyUsers: { currentMonth: 8, lastMonth: 2 },
   totalTrips: 9,
-  monthlyTrips: { currentMonth: 5, lastMonth: 4},
-  activeUsers: { total: 9, currentMonth: 4, lastMonth: 2},
+  monthlyTrips: { currentMonth: 5, lastMonth: 4 },
+  activeUsers: { total: 9, currentMonth: 4, lastMonth: 2 },
 };
 
 export const allTrips = [
@@ -191,7 +191,7 @@ export const allTrips = [
   },
 ];
 
-const users = [
+export const users = [
   {
     id: 1,
     name: "John Doe",
