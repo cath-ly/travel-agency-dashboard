@@ -4,10 +4,17 @@ import {
   GridComponent,
 } from "@syncfusion/ej2-react-grids";
 import { Header } from "components";
-import { users } from "~/constants";
-import { cn } from "~/lib/utils";
+import { getUsers } from "~/appwrite/authentication";
+import { cn, formatDate } from "~/lib/utils";
+import type { Route } from "./+types/userLayout";
 
-const UserLayout = () => {
+export const loader = async () => {
+  const { users, total } = await getUsers(10, 0);
+  return { users, total };
+};
+
+const UserLayout = ({ loaderData }: Route.ComponentProps) => {
+  const { users } = loaderData;
   return (
     <main className="users wrapper">
       <Header
@@ -43,12 +50,9 @@ const UserLayout = () => {
             headerText="Joined At"
             width="120"
             textAlign="Left"
-          />
-          <ColumnDirective
-            field="itineraryCreated"
-            headerText="Trip Created At"
-            width="130"
-            textAlign="Left"
+            template={({ joinedAt }: { joinedAt: string }) =>
+              formatDate(joinedAt)
+            }
           />
           <ColumnDirective
             field="status"
