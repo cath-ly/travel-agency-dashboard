@@ -1,4 +1,14 @@
-2.2.0
+3.0
+
+- Partially implemented Trips Page Form
+- Implemented REST Countries API 3.1, made changes to grant field for:
+
+  - Flag
+  - Name
+  - Coordianates
+  - Map
+
+    2.2.0
 
 - Implemented User's Table in Users Page
 
