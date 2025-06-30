@@ -1,6 +1,8 @@
 import { ComboBoxComponent } from "@syncfusion/ej2-react-dropdowns";
 import type { Route } from "./+types/createTrip";
 import { Header } from "components";
+import { comboBoxItems, selectItems } from "~/constants";
+import { formatKey } from "~/lib/utils";
 
 export const loader = async () => {
   const response = await fetch(
@@ -9,7 +11,7 @@ export const loader = async () => {
   const data = await response.json();
 
   return data.map((country: any) => ({
-    name: country.flag + country.name.common,
+    name: country.flag + " " + country.name.common,
     coordinates: country.latlng,
     value: country.name.common,
     openStreetMap: country.maps?.openStreetMap,
@@ -62,6 +64,52 @@ const CreateTrip = ({ loaderData }: Route.ComponentProps) => {
               }}
             />
           </div>
+          <div>
+            <label htmlFor="duration">Duration</label>
+            <input
+              id="duration"
+              name="duration"
+              type="number"
+              placeholder="Enter the duration for your trips in days (1, 5, 14, ...)"
+              className="form-input placeholder:text-gray-100"
+              onChange={(e) => {
+                //value shouldn't go <=0
+                handleChange("duration", Number(e.target.value));
+              }}
+            />
+          </div>
+          {selectItems.map((key) => (
+            <div key="key">
+              <label htmlFor={key}>{formatKey(key)}</label>
+              <ComboBoxComponent
+                id={key}
+                dataSource={comboBoxItems[key].map((item) => ({
+                  text: item,
+                  value: item,
+                }))}
+                fields={{ text: "text", value: "value" }}
+                placeholder={`Select ${formatKey(key)}`}
+                change={(e: { value: string | undefined }) => {
+                  if (e.value) {
+                    handleChange(key, e.value);
+                  }
+                }}
+                allowFiltering
+                filtering={(search) => {
+                  const query = search.text.toLowerCase();
+                  search.updateData(
+                    comboBoxItems[key]
+                      .filter((item) => item.toLowerCase().includes(query))
+                      .map((item) => ({
+                        text: item,
+                        value: item,
+                      }))
+                  );
+                }}
+                className="combo-box"
+              />
+            </div>
+          ))}
         </form>
       </section>
     </main>
