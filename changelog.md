@@ -1,4 +1,15 @@
-3.0
+3.1.0
+
+- Fixed calculateTrendPercentage export redundancy
+- Implemented semi-functional Trips Page Form:
+
+  - Trip Duration
+  - Group Type
+  - Travel Style
+  - Interest
+  - Budget
+
+    3.0.0
 
 - Partially implemented Trips Page Form
 - Implemented REST Countries API 3.1, made changes to grant field for:
