@@ -2,7 +2,7 @@ import { ComboBoxComponent } from "@syncfusion/ej2-react-dropdowns";
 import type { Route } from "./+types/createTrip";
 import { Header } from "components";
 import { comboBoxItems, selectItems } from "~/constants";
-import { formatKey } from "~/lib/utils";
+import { cn, formatKey } from "~/lib/utils";
 import { useState } from "react";
 import {
   LayerDirective,
@@ -10,6 +10,8 @@ import {
   MapsComponent,
 } from "@syncfusion/ej2-react-maps";
 import { world_map } from "~/constants/world_map";
+import { ButtonComponent } from "@syncfusion/ej2-react-buttons";
+import { account } from "~/appwrite/client";
 
 export const loader = async () => {
   const response = await fetch(
@@ -36,7 +38,44 @@ const CreateTrip = ({ loaderData }: Route.ComponentProps) => {
     groupType: "",
   });
 
-  const handleSubmit = async () => {};
+  const [error, setError] = useState<string | null>(null);
+  const [loader, setLoader] = useState(false);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoader(true);
+    if (
+      !formData.country ||
+      !formData.budget ||
+      !formData.groupType ||
+      !formData.interest ||
+      !formData.travelStyle
+    ) {
+      setError("Missing arguments for trip itinerary");
+      setLoader(false);
+      return;
+    }
+    if (formData.duration < 1 || formData.duration > 21) {
+      setError("Duration must be within 1-21 days");
+      setLoader(false);
+      return;
+    }
+
+    const user = await account.get();
+    if (!user.$id) {
+      console.error("Failed to gather User's account");
+      setLoader(false);
+      return;
+    }
+    try {
+      console.log("user", user);
+      console.log("form", formData);
+    } catch (err) {
+      console.error("Failed to generate AI Trip", err);
+    } finally {
+      setLoader(false);
+    }
+  };
   const handleChange = (key: keyof TripFormData, value: string | number) => {
     setFormData({ ...formData, [key]: value });
   };
@@ -49,7 +88,7 @@ const CreateTrip = ({ loaderData }: Route.ComponentProps) => {
   const mapData = [
     {
       country: formData.country,
-      color: "#EA382E",
+      color: "#C8A2C8",
       coordinates:
         countries.find((c: Country) => c.name === formData.country)
           ?.coordinates || [],
@@ -148,11 +187,35 @@ const CreateTrip = ({ loaderData }: Route.ComponentProps) => {
                   shapeData={world_map}
                   shapePropertyPath="name"
                   shapeDataPath="country"
-                  shapeSettings={{ colorValuePath: "color", fill: "#C8A2C8" }}
+                  shapeSettings={{ colorValuePath: "color", fill: "#e2e2e2" }}
                 />
               </LayersDirective>
             </MapsComponent>
           </div>
+
+          <div className="bg-gray-200 h-px w-full"></div>
+          {error && (
+            <div className="error">
+              <p>{error}</p>
+            </div>
+          )}
+          <footer className="px-6 w-full">
+            <ButtonComponent
+              type="submit"
+              className="button-class !h-12 !w-full"
+              disabled={loader}>
+              <img
+                src={`/assets/icons/${
+                  loader ? "loader.svg" : "magic-star.svg"
+                }`}
+                alt="ai-generate"
+                className={cn("size-5", { "animate-spin": loader })}
+              />
+              <span className="p-16-semibold text-white">
+                {loader ? "Generating..." : "Generate Trip"}
+              </span>
+            </ButtonComponent>
+          </footer>
         </form>
       </section>
     </main>
