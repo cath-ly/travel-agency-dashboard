@@ -41,7 +41,7 @@ const CreateTrip = ({ loaderData }: Route.ComponentProps) => {
   const [error, setError] = useState<string | null>(null);
   const [loader, setLoader] = useState(false);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoader(true);
     if (
@@ -70,6 +70,7 @@ const CreateTrip = ({ loaderData }: Route.ComponentProps) => {
     try {
       console.log("user", user);
       console.log("form", formData);
+      setError(null);
     } catch (err) {
       console.error("Failed to generate AI Trip", err);
     } finally {
