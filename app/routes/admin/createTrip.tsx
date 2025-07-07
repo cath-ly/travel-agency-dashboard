@@ -3,6 +3,13 @@ import type { Route } from "./+types/createTrip";
 import { Header } from "components";
 import { comboBoxItems, selectItems } from "~/constants";
 import { formatKey } from "~/lib/utils";
+import { useState } from "react";
+import {
+  LayerDirective,
+  LayersDirective,
+  MapsComponent,
+} from "@syncfusion/ej2-react-maps";
+import { world_map } from "~/constants/world_map";
 
 export const loader = async () => {
   const response = await fetch(
@@ -19,14 +26,35 @@ export const loader = async () => {
 };
 
 const CreateTrip = ({ loaderData }: Route.ComponentProps) => {
-  const handleSubmit = async () => {};
-  const handleChange = (key: keyof TripFormData, value: string | number) => {};
-
   const countries = loaderData as Country[];
+  const [formData, setFormData] = useState<TripFormData>({
+    country: countries[0]?.name || "",
+    travelStyle: "",
+    interest: "",
+    budget: "",
+    duration: 0,
+    groupType: "",
+  });
+
+  const handleSubmit = async () => {};
+  const handleChange = (key: keyof TripFormData, value: string | number) => {
+    setFormData({ ...formData, [key]: value });
+  };
+
   const countryData = countries.map((country) => ({
     text: country.name,
     value: country.value,
   }));
+
+  const mapData = [
+    {
+      country: formData.country,
+      color: "#EA382E",
+      coordinates:
+        countries.find((c: Country) => c.name === formData.country)
+          ?.coordinates || [],
+    },
+  ];
   return (
     <main className="flex flex-col gap-10 pb-20 wrapper">
       <Header
@@ -110,6 +138,21 @@ const CreateTrip = ({ loaderData }: Route.ComponentProps) => {
               />
             </div>
           ))}
+
+          <div>
+            <label htmlFor="location">Location</label>
+            <MapsComponent>
+              <LayersDirective>
+                <LayerDirective
+                  dataSource={mapData}
+                  shapeData={world_map}
+                  shapePropertyPath="name"
+                  shapeDataPath="country"
+                  shapeSettings={{ colorValuePath: "color", fill: "#C8A2C8" }}
+                />
+              </LayersDirective>
+            </MapsComponent>
+          </div>
         </form>
       </section>
     </main>
