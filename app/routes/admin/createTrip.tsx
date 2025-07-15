@@ -12,6 +12,7 @@ import {
 import { world_map } from "~/constants/world_map";
 import { ButtonComponent } from "@syncfusion/ej2-react-buttons";
 import { account } from "~/appwrite/client";
+import { useNavigate } from "react-router";
 
 export const loader = async () => {
   const response = await fetch(
@@ -29,10 +30,11 @@ export const loader = async () => {
 
 const CreateTrip = ({ loaderData }: Route.ComponentProps) => {
   const countries = loaderData as Country[];
+  const navigate = useNavigate();
   const [formData, setFormData] = useState<TripFormData>({
     country: countries[0]?.name || "",
     travelStyle: "",
-    interest: "",
+    interests: "",
     budget: "",
     duration: 0,
     groupType: "",
@@ -48,10 +50,11 @@ const CreateTrip = ({ loaderData }: Route.ComponentProps) => {
       !formData.country ||
       !formData.budget ||
       !formData.groupType ||
-      !formData.interest ||
+      !formData.interests ||
       !formData.travelStyle
     ) {
       setError("Missing arguments for trip itinerary");
+      console.log(formData);
       setLoader(false);
       return;
     }
@@ -68,8 +71,25 @@ const CreateTrip = ({ loaderData }: Route.ComponentProps) => {
       return;
     }
     try {
-      console.log("user", user);
-      console.log("form", formData);
+      const response = await fetch("/api/create-trip", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          country: formData.country,
+          duration: formData.duration,
+          travelStyle: formData.travelStyle,
+          interests: formData.interests,
+          budget: formData.budget,
+          groupType: formData.groupType,
+          userId: user.$id,
+        }),
+      });
+
+      const result: CreateTripResponse = await response.json();
+      if (result?.id) navigate(`/trips/${result.id}`);
+      else {
+        console.error("Failed to obtain AI Trip Itinerary");
+      }
       setError(null);
     } catch (err) {
       console.error("Failed to generate AI Trip", err);
@@ -147,7 +167,7 @@ const CreateTrip = ({ loaderData }: Route.ComponentProps) => {
             />
           </div>
           {selectItems.map((key) => (
-            <div key="key">
+            <div key={key}>
               <label htmlFor={key}>{formatKey(key)}</label>
               <ComboBoxComponent
                 id={key}
