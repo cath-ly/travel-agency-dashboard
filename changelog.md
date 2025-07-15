@@ -1,4 +1,9 @@
-3.1.0
+4.0.0
+
+- Added support for Gemini AI and Unsplash API
+- Created Create Trip API following the handleSubmit request
+
+  3.1.0
 
 - Fixed calculateTrendPercentage export redundancy
 - Implemented semi-functional Trips Page Form:
