@@ -4,7 +4,7 @@ import {
   GridComponent,
 } from "@syncfusion/ej2-react-grids";
 import { Header } from "components";
-import { getUsers } from "~/appwrite/authentication";
+import { getUsers } from "~/appwrite/collect";
 import { cn, formatDate } from "~/lib/utils";
 import type { Route } from "./+types/userLayout";
 
