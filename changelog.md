@@ -1,4 +1,9 @@
-4.0.0
+4.1.0
+
+- Updated directories for appwrites to keep consistency
+- Made Page Template for Trip Detail
+
+  4.0.0
 
 - Added support for Gemini AI and Unsplash API
 - Created Create Trip API following the handleSubmit request
