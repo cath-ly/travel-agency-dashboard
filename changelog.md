@@ -1,4 +1,12 @@
-4.1.0
+4.2.0
+
+- Added new component:
+  - InfoPill
+- Updated Trip Detail's page to incorporate:
+
+  - Pills and Trip's Images
+
+    4.1.0
 
 - Updated directories for appwrites to keep consistency
 - Made Page Template for Trip Detail
