@@ -8,6 +8,6 @@ export default [
     route("users", "routes/admin/userLayout.tsx"),
     route("trips", "routes/admin/trips.tsx"),
     route("trips/create", "routes/admin/createTrip.tsx"),
-    route("trips/:tripId", "routes/admin/tripDetail.tsx"),
+    route("trips/:tripID", "routes/admin/tripDetail.tsx"),
   ]),
 ] satisfies RouteConfig;
