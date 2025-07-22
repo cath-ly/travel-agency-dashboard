@@ -12,7 +12,7 @@
 
   - Pills and Trip's Images
 
-    4.1.0
+  4.1.0
 
 - Updated directories for appwrites to keep consistency
 - Made Page Template for Trip Detail
