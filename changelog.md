@@ -1,4 +1,10 @@
-4.2.0
+4.3.0
+
+- Trip Detail is fully functional
+- Renamed util method: getTripByID
+- Added new util method: parseTripData
+
+  4.2.0
 
 - Added new component:
   - InfoPill
