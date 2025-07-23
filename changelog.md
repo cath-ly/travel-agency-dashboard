@@ -1,4 +1,11 @@
-4.3.0
+4.4.0
+
+- Trips is fully functional:
+
+  - handleClick method
+  - Pagination
+
+    4.3.0
 
 - Trip Detail is fully functional
 - Renamed util method: getTripByID
