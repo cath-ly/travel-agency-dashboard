@@ -5,3 +5,5 @@ export { default as getFirstWord } from "./getFirstWord";
 export { default as formatKey } from "./formatKey";
 export { default as parseMarkdownToJSON } from "./parseMarkdownToJSON";
 export { default as parseTripData } from "./parseTripData";
+export { default as filterByDate } from "./filterByDate";
+export { default as filterUsersByRole } from "./filterUsersByRole";
