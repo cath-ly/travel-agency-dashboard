@@ -101,7 +101,7 @@ declare interface DashboardStats {
     currentMonth: number;
     lastMonth: number;
   };
-  activeUser: {
+  activeUsers: {
     total: number;
     currentMonth: number;
     lastMonth: number;
