@@ -4,3 +4,7 @@ export { default as getExistingUser } from "./getExistingUser";
 export { default as getUsers } from "./getUsers";
 export { default as getAllTrips } from "./getAllTrips";
 export { default as getTripByID } from "./getTripByID";
+export { default as getUserTripStat } from "./getUserTripStat";
+export { default as getTripsCreatedPerDay } from "./getCreatedTripsPerDay";
+export { default as getTripsByTravelStyle } from "./getTripsByTravelStyle";
+export { default as getUserGrowthPerDay } from "./getUserGrowthPerDay";

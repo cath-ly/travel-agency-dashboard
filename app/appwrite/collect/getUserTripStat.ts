@@ -1,7 +1,7 @@
 import { filterByDate, filterUsersByRole } from "~/lib/utils";
 import { appwriteConfig, database } from "../client";
 
-export const getUserTripStats = async (): Promise<DashboardStats> => {
+const getUserTripStat = async (): Promise<DashboardStats> => {
   const d = new Date();
   const currentMonth = new Date(d.getFullYear(), d.getMonth(), 1).toISOString();
   const startLastMonth = new Date(
@@ -38,7 +38,7 @@ export const getUserTripStats = async (): Promise<DashboardStats> => {
         endLastMonth
       ),
     },
-    activeUser: {
+    activeUsers: {
       total: filterUsersByRole(users, "user").length,
       currentMonth: filterByDate(
         filterUsersByRole(users, "user"),
@@ -70,3 +70,5 @@ export const getUserTripStats = async (): Promise<DashboardStats> => {
     },
   };
 };
+
+export default getUserTripStat;

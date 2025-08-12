@@ -1,15 +1,54 @@
 import { Header, StatCard, TripCard } from "components";
-import { getUser } from "~/appwrite/collect";
-import { allTrips, dashboardStat, user } from "~/constants";
+import {
+  getAllTrips,
+  getTripsByTravelStyle,
+  getUser,
+  getUserGrowthPerDay,
+  getUserTripStat,
+  getUsers,
+} from "~/appwrite/collect";
 import type { Route } from "./+types/dashboard";
+import { parseTripData } from "~/lib/utils";
 
-export const clientLoader = async () => await getUser();
+export const clientLoader = async () => {
+  const [user, dashboardStat, trips, userGrowth, tripsByTravelStyle, allUsers] =
+    await Promise.all([
+      await getUser(),
+      await getUserTripStat(),
+      await getAllTrips(4, 0),
+      await getTripsByTravelStyle(),
+      await getUserGrowthPerDay(),
+      await getUsers(4, 0),
+    ]);
 
-const { totalUsers, monthlyUsers, totalTrips, monthlyTrips, activeUsers } =
-  dashboardStat;
+  const allTrips = trips.allTrips.map(({ $id, tripDetail, imageUrls }) => ({
+    id: $id,
+    ...parseTripData(tripDetail),
+    imageUrls: imageUrls ?? [],
+  }));
+
+  const mappedUsers: UsersItineraryCount[] = allUsers.users.map((user) => ({
+    imageUrl: user.imageUrl,
+    name: user.name,
+    count: user.itineraryCount,
+  }));
+
+  return {
+    user,
+    dashboardStat,
+    allTrips,
+    userGrowth,
+    tripsByTravelStyle,
+    allUsers: mappedUsers,
+  };
+};
 
 const Dashboard = ({ loaderData }: Route.ComponentProps) => {
-  const user = loaderData as User | null;
+  const user = loaderData.user as User | null;
+  const { totalUsers, monthlyUsers, totalTrips, monthlyTrips, activeUsers } =
+    loaderData.dashboardStat;
+
+  const allTrips = loaderData.allTrips as Trip[] | [];
   return (
     <main className="dashboard wrapper">
       <Header
@@ -42,19 +81,27 @@ const Dashboard = ({ loaderData }: Route.ComponentProps) => {
       <section className="container">
         <h1 className="text-xl font-semibold">Created Trips</h1>
         <div className="trip-grid">
-          {allTrips
-            .slice(0, 4)
-            .map(({ id, name, imageUrls, itinerary, tags, estimatedPrice }) => (
+          {allTrips.map(
+            ({
+              id,
+              name,
+              imageUrls,
+              itinerary,
+              interests,
+              travelStyle,
+              estimatedPrice,
+            }) => (
               <TripCard
+                id={id}
                 key={id}
-                id={id.toString()}
                 name={name}
+                location={itinerary?.[0].location}
                 imageUrl={imageUrls[0]}
-                location={itinerary?.[0]?.location ?? ""}
-                tags={tags}
+                tags={[interests, travelStyle]}
                 price={estimatedPrice}
               />
-            ))}
+            )
+          )}
         </div>
       </section>
     </main>
