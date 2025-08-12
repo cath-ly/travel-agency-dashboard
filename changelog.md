@@ -1,4 +1,13 @@
-4.5.0
+4.6.0
+
+- Implemented:
+  - getCreatedTripsPerDay
+  - getTripsByTravelStyle
+  - getUserGrowthPerDay
+- Fixed types in DashboardStats
+- Removed mock data from Dashboards
+
+  4.5.0
 
 - Implemented getUserTripStat
 
@@ -9,7 +18,7 @@
   - handleClick method
   - Pagination
 
-  4.3.0
+    4.3.0
 
 - Trip Detail is fully functional
 - Renamed util method: getTripByID
@@ -44,7 +53,7 @@
   - Interest
   - Budget
 
-  3.0.0
+    3.0.0
 
 - Partially implemented Trips Page Form
 - Implemented REST Countries API 3.1, made changes to grant field for:
@@ -54,7 +63,7 @@
   - Coordianates
   - Map
 
-  2.2.0
+    2.2.0
 
 - Implemented User's Table in Users Page
 
@@ -68,7 +77,7 @@
   - AdminLayout Page
   - NavItems Component
 
-  2.0.0
+    2.0.0
 
 - Added Appwrite Dependencies
 - Implemented Google OAuth Functionality
@@ -85,7 +94,7 @@
 
   - getFirstWord
 
-  1.2.0
+    1.2.0
 
 - Added Dashboard Layout
 
@@ -97,7 +106,7 @@
   - Sidebar
   - Mobile Sidebar
 
-  1.0.0
+    1.0.0
 
 - Setup env using modern technologies:
   - Syncfusion
