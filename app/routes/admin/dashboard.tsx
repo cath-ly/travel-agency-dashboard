@@ -9,6 +9,18 @@ import {
 } from "~/appwrite/collect";
 import type { Route } from "./+types/dashboard";
 import { parseTripData } from "~/lib/utils";
+import {
+  Category,
+  ChartComponent,
+  ColumnSeries,
+  DataLabel,
+  Inject,
+  SeriesCollectionDirective,
+  SeriesDirective,
+  SplineAreaSeries,
+  Tooltip,
+} from "@syncfusion/ej2-react-charts";
+import { tripXAxis, tripYAxis, userXAxis, userYAxis } from "~/constants";
 
 export const clientLoader = async () => {
   const [user, dashboardStat, trips, userGrowth, tripsByTravelStyle, allUsers] =
@@ -45,10 +57,11 @@ export const clientLoader = async () => {
 
 const Dashboard = ({ loaderData }: Route.ComponentProps) => {
   const user = loaderData.user as User | null;
+  const allTrips = loaderData.allTrips as Trip[] | [];
   const { totalUsers, monthlyUsers, totalTrips, monthlyTrips, activeUsers } =
     loaderData.dashboardStat;
+  const { userGrowth, tripsByTravelStyle, allUsers } = loaderData;
 
-  const allTrips = loaderData.allTrips as Trip[] | [];
   return (
     <main className="dashboard wrapper">
       <Header
@@ -98,11 +111,76 @@ const Dashboard = ({ loaderData }: Route.ComponentProps) => {
                 location={itinerary?.[0].location}
                 imageUrl={imageUrls[0]}
                 tags={[interests, travelStyle]}
-                price={estimatedPrice}
+                price={estimatedPrice!}
               />
             )
           )}
         </div>
+      </section>
+      <section className="grid grid-cols-1 lg:grid-cols-2 gap-5">
+        <ChartComponent
+          id="chart-1"
+          primaryXAxis={userXAxis}
+          primaryYAxis={userYAxis}
+          title="User Growth"
+          tooltip={{ enable: true }}>
+          <Inject
+            services={[
+              ColumnSeries,
+              SplineAreaSeries,
+              Category,
+              DataLabel,
+              Tooltip,
+            ]}
+          />
+          <SeriesCollectionDirective>
+            <SeriesDirective
+              dataSource={userGrowth}
+              xName="day"
+              yName="count"
+              type="Column"
+              name="Column"
+              columnWidth={0.3}
+              cornerRadius={{ topLeft: 10, topRight: 10 }}
+            />
+            <SeriesDirective
+              dataSource={userGrowth}
+              xName="day"
+              yName="count"
+              type="SplineArea"
+              name="Wave"
+              fill="rgba(71, 132, 238, 0.3)"
+              border={{ width: 2, color: "#4784EE" }}
+            />
+          </SeriesCollectionDirective>
+        </ChartComponent>
+        <ChartComponent
+          id="chart-2"
+          primaryXAxis={tripXAxis}
+          primaryYAxis={tripYAxis}
+          title="Trip Trend"
+          tooltip={{ enable: true }}>
+          <Inject
+            services={[
+              ColumnSeries,
+              SplineAreaSeries,
+              Category,
+              DataLabel,
+              Tooltip,
+            ]}
+          />
+          <SeriesCollectionDirective>
+            <SeriesDirective
+              dataSource={tripsByTravelStyle}
+              xName="travelStyle"
+              yName="count"
+              type="Column"
+              name="day"
+              columnWidth={0.3}
+              cornerRadius={{ topLeft: 10, topRight: 10 }}
+            />
+          </SeriesCollectionDirective>
+        </ChartComponent>
       </section>
     </main>
   );

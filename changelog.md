@@ -1,4 +1,11 @@
-4.6.0
+4.7.0
+
+- Implemented Grid Components to Dashboard:
+
+  - User's Growth
+  - Trips by Travel Style
+
+  4.6.0
 
 - Implemented:
   - getCreatedTripsPerDay
