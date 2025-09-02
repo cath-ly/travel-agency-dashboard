@@ -39,6 +39,7 @@
   --color-red-100: #ff543d;
 
   --background-image-auth: url("/assets/images/auth-img.webp");
+  --background-image-main: url("/assets/images/travel-mainpage.jpg");
   --background-image-hero: url("/assets/images/hero-img.png");
   --background-image-card-1: url("/assets/images/card-img-1.png");
   --background-image-card-2: url("/assets/images/card-img-2.png");
@@ -109,6 +110,9 @@
   }
   .auth {
     @apply w-full h-screen flex bg-auth bg-cover bg-no-repeat;
+  }
+  .travel-main {
+    @apply w-full h-screen flex bg-main bg-cover bg-no-repeat;
   }
 
   .payment-success {
@@ -295,6 +299,15 @@
       }
     }
   }
+  .page-items {
+    @apply flex flex-row justify-between h-full;
+  }
+  .page-footer {
+    @apply flex px-6 py-10 h-full gap-2.5 pb-8;
+    img {
+      @apply size-10 rounded-full aspect-square;
+    }
+  }
   .mobile-sidebar {
     @apply lg:hidden flex flex-col gap-5;
     header {
@@ -359,6 +372,14 @@
       @apply w-full h-full bg-light-200 pt-12 lg:pt-10;
     }
   }
+
+  .page-layout {
+    @apply flex flex-col h-screen w-full;
+    .children {
+      @apply w-full h-full bg-light-200;
+    }
+  }
+
   .user-trip {
     @apply pb-20 flex flex-col lg:flex-row gap-5 justify-between;
   }

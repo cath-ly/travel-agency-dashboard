@@ -1,3 +1,8 @@
+4.9.0
+- Implemented Layout for Index (Get Started) Page
+- Built basic template for main page
+- Resolved bugs with redirect
+
 4.8.0
 - Implemented .prettierignore file to support changelog syntax
 - Implemented components in Dashboard:
